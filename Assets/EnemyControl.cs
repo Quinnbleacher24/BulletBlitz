@@ -9,15 +9,16 @@ public class EnemyControl : MonoBehaviour
     public float vel_x;
     public float vel_y;
     public float speed;
+    public bool dead;
 
     // Start is called before the first frame update
     void Start()
     {
         pos_x = 8;
         pos_y = 0;
-        vel_x = 0;
-        vel_y = 0;
         speed = 0.05F;
+        setDirection();
+        dead = false;
     }
 
     // Update is called once per frame
@@ -25,11 +26,15 @@ public class EnemyControl : MonoBehaviour
     {
         transform.position = new Vector2(pos_x, pos_y);
         Move();
+        CheckStatus();
+        if (dead)
+        {
+            Start();
+        }
     }
 
     void Move()
     {
-        setDirection();
         pos_x += vel_x * speed;
         pos_y += vel_y * speed;
     }
@@ -40,5 +45,10 @@ public class EnemyControl : MonoBehaviour
         float distance = Mathf.Sqrt(Mathf.Pow(player_pos.x - pos_x, 2) + Mathf.Pow(player_pos.y - pos_y, 2));
         vel_x = (player_pos.x - pos_x) / distance;
         vel_y = (player_pos.y - pos_y) / distance;
+    }
+
+    void CheckStatus()
+    {
+        
     }
 }
