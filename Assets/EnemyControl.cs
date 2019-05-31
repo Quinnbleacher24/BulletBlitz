@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class EnemyControl : MonoBehaviour
 {
     public float pos_x;
     public float pos_y;
@@ -13,11 +13,11 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos_x = -8;
+        pos_x = 8;
         pos_y = 0;
         vel_x = 0;
         vel_y = 0;
-        speed = 0.1F;
+        speed = 0.05F;
     }
 
     // Update is called once per frame
@@ -30,32 +30,15 @@ public class PlayerControl : MonoBehaviour
     void Move()
     {
         setDirection();
-
         pos_x += vel_x * speed;
         pos_y += vel_y * speed;
     }
 
     void setDirection()
     {
-        vel_x = 0;
-        vel_y = 0;
-
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-        {
-            vel_y += 1;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            vel_y -= 1;
-        }
-        
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            vel_x += 1;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            vel_x -= 1;
-        }
+        Vector2 player_pos = GameObject.Find("Player_Temp").transform.position;
+        float distance = Mathf.Sqrt(Mathf.Pow(player_pos.x - pos_x, 2) + Mathf.Pow(player_pos.y - pos_y, 2));
+        vel_x = (player_pos.x - pos_x) / distance;
+        vel_y = (player_pos.y - pos_y) / distance;
     }
 }
