@@ -6,9 +6,9 @@ public class PlayerControl : MonoBehaviour
 {
     public float pos_x;
     public float pos_y;
-    public int vel_x;
-    public int vel_y;
-    public float speed = 0.1F;
+    public float vel_x;
+    public float vel_y;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
         pos_y = 0;
         vel_x = 0;
         vel_y = 0;
+        speed = 0.1F;
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class PlayerControl : MonoBehaviour
     void Move()
     {
         setDirection();
+
         pos_x += vel_x * speed;
         pos_y += vel_y * speed;
     }
