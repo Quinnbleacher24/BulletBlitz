@@ -26,11 +26,6 @@ public class EnemyControl : MonoBehaviour
     {
         transform.position = new Vector2(pos_x, pos_y);
         Move();
-        CheckStatus();
-        if (dead)
-        {
-            Start();
-        }
     }
 
     void Move()
@@ -41,14 +36,9 @@ public class EnemyControl : MonoBehaviour
 
     void setDirection()
     {
-        Vector2 player_pos = GameObject.Find("Player_Temp").transform.position;
+        Vector2 player_pos = GameObject.FindGameObjectWithTag("Player").transform.position;
         float distance = Mathf.Sqrt(Mathf.Pow(player_pos.x - pos_x, 2) + Mathf.Pow(player_pos.y - pos_y, 2));
         vel_x = (player_pos.x - pos_x) / distance;
         vel_y = (player_pos.y - pos_y) / distance;
-    }
-
-    void CheckStatus()
-    {
-        
     }
 }

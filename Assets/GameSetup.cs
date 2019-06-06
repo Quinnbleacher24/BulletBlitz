@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameSetup : MonoBehaviour
 {
-    public Camera mainCam;
     public BoxCollider2D Top_Wall;
     public BoxCollider2D bottom;
     public BoxCollider2D left;
     public BoxCollider2D right;
 
-    public Transform player;
+    public EnemyControl enemy;
+    public PlayerControl player;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +28,14 @@ public class GameSetup : MonoBehaviour
 
         right.size = new Vector2(1f, ScreenSize.y * 2);
         right.offset = new Vector2(ScreenSize.x + 0.5f, 0f);
+
+
+        Instantiate(enemy);
+        Instantiate(player);
+    }
+
+    void Update()
+    {
+        
     }
 }
