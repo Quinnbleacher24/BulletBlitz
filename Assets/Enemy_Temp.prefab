@@ -119,9 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3607c211e504f145970f60aa28cb2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos_x: 0
-  pos_y: 0
-  vel_x: 0
-  vel_y: 0
+  pos: {x: 0, y: 0}
+  vel: {x: 0, y: 0}
   speed: 0.1
   dead: 0

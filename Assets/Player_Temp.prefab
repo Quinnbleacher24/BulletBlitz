@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4457776324699124328}
   - component: {fileID: 4457776324699124329}
   - component: {fileID: 4457776324699124330}
-  - component: {fileID: 4457776324699124326}
+  - component: {fileID: 3969427148078845110}
   m_Layer: 0
   m_Name: Player_Temp
   m_TagString: Player
@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631ca2c848c7418d73ec1e43c50ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
   speed: 0.1
---- !u!50 &4457776324699124326
+  rb: {fileID: 0}
+--- !u!50 &3969427148078845110
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -135,7 +137,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1

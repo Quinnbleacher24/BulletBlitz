@@ -38,4 +38,10 @@ public class GameSetup : MonoBehaviour
     {
         
     }
+
+    void checkStatus()
+    {
+        enemy.checkStatus();
+        player.checkStatus();
+    }
 }

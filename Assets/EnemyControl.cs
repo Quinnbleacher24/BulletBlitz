@@ -13,7 +13,7 @@ public class EnemyControl : MonoBehaviour
     void Start()
     {
 
-        pos = new Vector2(8, 2);
+        pos = new Vector2(8, -1);
         vel = setDirection();
         dead = false;
     }
@@ -35,5 +35,10 @@ public class EnemyControl : MonoBehaviour
         Vector2 player_pos = GameObject.FindGameObjectWithTag("Player").transform.position;
         Vector2 distance = player_pos - pos;
         return distance / distance.magnitude;
+    }
+
+    public void checkStatus()
+    {
+
     }
 }
