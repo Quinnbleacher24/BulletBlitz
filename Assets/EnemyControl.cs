@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
-    public Vector2 pos;
     public Vector2 vel;
     public float speed;
     public bool dead;
@@ -13,8 +12,10 @@ public class EnemyControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos = new Vector2(10, Random.Range(-6F, 6F));
-        vel = setDirection();
+        Vector2 spawn = new Vector2(10, Random.Range(-6F, 6F));
+        transform.position = spawn;
+
+        vel = setDirection(spawn);
         dead = false;
         speed = 7;
         rb = GetComponent<Rigidbody2D>();
@@ -25,17 +26,14 @@ public class EnemyControl : MonoBehaviour
     {
         checkStatus();
         Move();
-        transform.position = pos;
     }
 
     void Move()
     {
-        Vector2 movement = vel;
-
-        rb.velocity = movement * speed;
+        rb.velocity = vel * speed;
     }
 
-    Vector2 setDirection()
+    Vector2 setDirection(Vector2 pos)
     {
         Vector2 player_pos = GameObject.FindGameObjectWithTag("Player").transform.position;
         Vector2 distance = player_pos - pos;
@@ -44,7 +42,11 @@ public class EnemyControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (pos.x < 0)
+        if (collision.gameObject.tag == "EnemyIgnoresCollider")
+        {
+            Physics2D.IgnoreCollision(GameObject.FindGameObjectWithTag("EnemyIgnoresCollider").GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+        else
         {
             dead = true;
         }
