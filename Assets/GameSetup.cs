@@ -12,11 +12,14 @@ public class GameSetup : MonoBehaviour
     public EnemyControl enemy;
     public PlayerControl player;
 
+    
+    public List<EnemyControl> enemies;
     public int wave;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemies = new List<EnemyControl>();
         wave = 0;
         setWallColliders();
         Instantiate(player);
@@ -24,7 +27,14 @@ public class GameSetup : MonoBehaviour
 
     void Update()
     {
-        
+        if (allEnemiesDead())
+        {
+            wave++;
+            for (int i = 0; i < wave; i++)
+            {
+                enemies.Add(Instantiate(enemy));
+            }
+        }
     }
 
     void setWallColliders()
@@ -48,5 +58,18 @@ public class GameSetup : MonoBehaviour
     {
         enemy.checkStatus();
         player.checkStatus();
+    }
+
+    bool allEnemiesDead()
+    {
+        for(int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].checkStatus();
+            if (!enemies[i].dead)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
