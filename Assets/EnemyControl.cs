@@ -24,7 +24,6 @@ public class EnemyControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkStatus();
         Move();
     }
 
@@ -42,21 +41,13 @@ public class EnemyControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "EnemyIgnoresCollider")
+        if (collision.gameObject.tag == "EnemyIgnoresCollider" || collision.gameObject.tag == "Enemy")
         {
-            Physics2D.IgnoreCollision(GameObject.FindGameObjectWithTag("EnemyIgnoresCollider").GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
         else
         {
             dead = true;
-        }
-    }
-
-    public void checkStatus()
-    {
-        if(dead)
-        {
-            Start();
         }
     }
 }

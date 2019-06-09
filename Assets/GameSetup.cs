@@ -9,8 +9,8 @@ public class GameSetup : MonoBehaviour
     public BoxCollider2D left;
     public BoxCollider2D right;
 
-    public EnemyControl enemy;
-    public PlayerControl player;
+    public EnemyControl enemyPrefab;
+    public PlayerControl playerPrefab;
 
     
     public List<EnemyControl> enemies;
@@ -22,17 +22,26 @@ public class GameSetup : MonoBehaviour
         enemies = new List<EnemyControl>();
         wave = 0;
         setWallColliders();
-        Instantiate(player);
+        Instantiate(playerPrefab);
     }
 
     void Update()
     {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].dead)
+            {
+                Destroy(enemies[i].gameObject);
+                enemies.RemoveAt(i);
+            }
+        }
+
         if (allEnemiesDead())
         {
             wave++;
             for (int i = 0; i < wave; i++)
             {
-                enemies.Add(Instantiate(enemy));
+                enemies.Add(Instantiate(enemyPrefab));
             }
         }
     }
@@ -54,17 +63,10 @@ public class GameSetup : MonoBehaviour
         right.offset = new Vector2(0.5F, 0f);
     }
 
-    void checkStatus()
-    {
-        enemy.checkStatus();
-        player.checkStatus();
-    }
-
     bool allEnemiesDead()
     {
         for(int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].checkStatus();
             if (!enemies[i].dead)
             {
                 return false;

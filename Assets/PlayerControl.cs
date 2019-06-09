@@ -32,9 +32,4 @@ public class PlayerControl : MonoBehaviour
 
         rb.velocity = movement * speed;
     }
-
-    public void checkStatus()
-    {
-
-    }
 }

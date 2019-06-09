@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 918463617}
   m_Layer: 0
   m_Name: Right_Wall
-  m_TagString: Untagged
+  m_TagString: EnemyIgnoresCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -631,8 +631,12 @@ MonoBehaviour:
   bottom: {fileID: 955618160}
   left: {fileID: 352259324}
   right: {fileID: 918463615}
-  enemy: {fileID: 418320606959447590, guid: 5704f6943e22c244091f7e6fdaa6dd9d, type: 3}
-  player: {fileID: 4457776324699124330, guid: e082b36d36006f64d99735ea182aa018, type: 3}
+  enemyPrefab: {fileID: 418320606959447590, guid: 5704f6943e22c244091f7e6fdaa6dd9d,
+    type: 3}
+  playerPrefab: {fileID: 4457776324699124330, guid: e082b36d36006f64d99735ea182aa018,
+    type: 3}
+  enemies: []
+  wave: 0
 --- !u!4 &1251300247
 Transform:
   m_ObjectHideFlags: 0
