@@ -8,6 +8,8 @@ public class PlayerControl : MonoBehaviour
     public float speed;
     public Rigidbody2D rb;
 
+    public bool dead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class PlayerControl : MonoBehaviour
 
         speed = 10;
         rb = GetComponent<Rigidbody2D>();
+
+        dead = false;
     }
 
     // Update is called once per frame
@@ -31,5 +35,19 @@ public class PlayerControl : MonoBehaviour
         Vector2 movement = new Vector2(vel_x, vel_y);
 
         rb.velocity = movement * speed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            dead = true;
+        }
+    }
+
+    public void respawn()
+    {
+        pos = new Vector2(-8, 0);
+        transform.position = pos;
     }
 }

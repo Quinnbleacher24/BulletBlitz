@@ -12,7 +12,7 @@ public class GameSetup : MonoBehaviour
     public EnemyControl enemyPrefab;
     public PlayerControl playerPrefab;
 
-    
+    public PlayerControl player;
     public List<EnemyControl> enemies;
     public int wave;
 
@@ -22,27 +22,21 @@ public class GameSetup : MonoBehaviour
         enemies = new List<EnemyControl>();
         wave = 0;
         setWallColliders();
-        Instantiate(playerPrefab);
+        player = Instantiate(playerPrefab);
     }
 
     void Update()
     {
-        for (int i = 0; i < enemies.Count; i++)
+        if (player.dead)
         {
-            if (enemies[i].dead)
-            {
-                Destroy(enemies[i].gameObject);
-                enemies.RemoveAt(i);
-            }
+            restart();
         }
 
-        if (allEnemiesDead())
+        clearEnemies();
+        
+        if (enemies.Count == 0)
         {
-            wave++;
-            for (int i = 0; i < wave; i++)
-            {
-                enemies.Add(Instantiate(enemyPrefab));
-            }
+            spawnWave();
         }
     }
 
@@ -63,15 +57,36 @@ public class GameSetup : MonoBehaviour
         right.offset = new Vector2(0.5F, 0f);
     }
 
-    bool allEnemiesDead()
+    void clearEnemies()
     {
-        for(int i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (!enemies[i].dead)
+            if (enemies[i].dead)
             {
-                return false;
+                Destroy(enemies[i].gameObject);
+                enemies.RemoveAt(i);
             }
         }
-        return true;
+    }
+
+    void spawnWave()
+    {
+        wave++;
+        for (int i = 0; i < wave; i++)
+        {
+            enemies.Add(Instantiate(enemyPrefab));
+        }
+    }
+
+    void restart()
+    {
+        foreach(EnemyControl enemy in enemies)
+        {
+            enemy.dead = true;
+        }
+
+        wave = 0;
+        player.dead = false;
+        player.respawn();
     }
 }
